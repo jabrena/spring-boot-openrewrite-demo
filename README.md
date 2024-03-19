@@ -1,5 +1,11 @@
 # spring-boot-openrewrite-demo
 
+## How to test in local?
+
+```
+mvn rewrite:run
+```
+
 ## References
 
 - https://mvnrepository.com/artifact/org.springframework.boot/spring-boot/

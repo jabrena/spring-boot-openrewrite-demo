@@ -4,26 +4,19 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!--
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.3</version>
-		<relativePath/>
-	</parent>
-	-->
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-parent</artifactId>
-		<version>2.7.9</version>
-		<relativePath/>
+		<!-- <version>2.7.9</version> -->
+		<version>3.2.3</version>
+		<relativePath />
 	</parent>
 
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
+
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>21</java.version>
@@ -57,6 +50,33 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!-- Openrewrite -->
+			<plugin>
+				<groupId>org.openrewrite.maven</groupId>
+				<artifactId>rewrite-maven-plugin</artifactId>
+				<version>5.25.0</version>
+				<configuration>
+					<activeRecipes>
+						<recipe>org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2</recipe>
+						<recipe>org.openrewrite.java.spring.NoRequestMappingAnnotation</recipe>
+						<recipe>org.openrewrite.java.spring.BeanMethodsNotPublic</recipe>
+						<recipe>org.openrewrite.java.spring.NoAutowiredOnConstructor</recipe>
+						<recipe>org.openrewrite.java.spring.boot3.PreciseBeanType</recipe>
+						<recipe>org.openrewrite.java.spring.boot3.SpringBoot3BestPractices</recipe>
+						<!-- https://docs.openrewrite.org/recipes/maven/upgradeparentversion -->
+						<!-- <recipe>org.openrewrite.maven.UpgradeParentVersion</recipe> -->
+					</activeRecipes>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.openrewrite.recipe</groupId>
+						<artifactId>rewrite-spring</artifactId>
+						<version>5.6.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
 		</plugins>
 	</build>
 
